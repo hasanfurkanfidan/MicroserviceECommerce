@@ -37,6 +37,7 @@ namespace Catalog.API
             services.Configure<CatalogDatabaseSettings>(Configuration.GetSection(nameof(CatalogDatabaseSettings)));
             services.AddSingleton<ICatalogDatabaseSettings>(p => p.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
             services.AddTransient<ICatalogContext, CatalogContext>();
+           
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(p=>
             {
@@ -57,7 +58,7 @@ namespace Catalog.API
             app.UseSwaggerUI(p=> {
                 p.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog APU V1");
             });
-
+          
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
